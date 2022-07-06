@@ -14,3 +14,7 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.ant-avatar {
+  margin-top: -3px !important;
+}
