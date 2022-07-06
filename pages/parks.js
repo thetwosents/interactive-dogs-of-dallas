@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import 'antd/dist/antd.css';
-import { Layout, Row, Col, Button, Tag, Avatar, Dropdown, Menu, Typography, Space } from 'antd';
-import { UserOutlined, MenuOutlined, ArrowRightOutlined, DownOutlined } from '@ant-design/icons';
+import { Layout, Row, Col, Button, Tag, Avatar, Dropdown, Menu, Typography } from 'antd';
+import { UserOutlined, MenuOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import Image from 'next/image';
 import { database } from '../firebase'
 import { onValue, ref } from "firebase/database";
@@ -105,7 +105,7 @@ const MainMenu = () => {
   return (
     <>
       <ul className={styles.mainMenu}>
-        {items.map((item, index) => <li><span>{item.label}</span></li>)}
+        {items.map((item, index) => <li key={index}><span>{item.label}</span></li>)}
         <Dropdown  overlay={menu} trigger={['click']} placement="bottomLeft">
           <Typography.Link>
             <li><span className={styles.avatar}><MenuOutlined style={{ marginRight: 12 }} /><Avatar size={32} icon={<UserOutlined />} /></span></li>
