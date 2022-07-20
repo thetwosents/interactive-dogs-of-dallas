@@ -6,13 +6,6 @@
   padding: 0px 80px !important;
 }
 
-.main {
-  /* min-height: 100vh; */
-  /* padding: 4rem 0; */
-  /* flex: 1; */
-  
-}
-
 .title a {
   color: #0070f3;
   text-decoration: none;
@@ -56,6 +49,8 @@ html body .parkImage {
   object-fit: cover !important;
     vertical-align: bottom;
     border-radius: 16px;
+    max-width: 100%;
+    width: 100%;
 }
 
 html body .parkTitle {
@@ -98,6 +93,10 @@ html body .mainMenu {
   margin-top: -15px;
 }
 
+html body .mainMenuActive {
+  color: red !important;
+}
+
 html body .mainMenu li {
   display: inline-block;
   margin: 0px 8px;
@@ -106,6 +105,9 @@ html body .mainMenu li {
   cursor: pointer;
   font-weight: 500;
 }
+
+
+
 
 html body .mainMenu li:not(:last-child) span {
   background-color: #fff;

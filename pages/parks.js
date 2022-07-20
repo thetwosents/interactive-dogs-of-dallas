@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react';
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import 'antd/dist/antd.css';
-import { Layout, Row, Col, Button, Tag, Avatar, Dropdown, Menu, Typography } from 'antd';
-import { UserOutlined, MenuOutlined, ArrowRightOutlined } from '@ant-design/icons';
+import { Layout, Row, Col, Button, Avatar, Dropdown, Menu, Typography, Skeleton } from 'antd';
+import { UserOutlined, MenuOutlined } from '@ant-design/icons';
 import Image from 'next/image';
 import { database } from '../firebase'
 import { onValue, ref } from "firebase/database";
+import MainHeader from '../components/Header';
+import CardGallery from '../components/CardGallery';
 
-const { Header, Content } = Layout;
+const { Content } = Layout;
 
 export const Parks = () => {
   const [items, setItems] = useState([])
@@ -36,114 +38,17 @@ export const Parks = () => {
           }}
         >
           <div className={styles.container}>
-            <h1 className={styles.pageHeader}>Nearby Parks</h1>
-            <p>{items.length} parks within <Tag color="green">15 miles</Tag> of 75202</p>
+            <h1 className={styles.pageHeader}>Parks</h1>
+            {/* <p>{items.length} parks within <Tag color="green">15 miles</Tag> of 75202</p> */}
             <CardGallery items={items} />
           </div>
-          <ShowMap />
+          {/* <ShowMap /> */}
         </Content>
       </Layout>
-
-      <main className={styles.main}>
-
-      </main>
     </>
   )
 }
 
-
-
-const MainHeader = () => {
-  return (
-    <Header className={styles.header} style={{
-      background: '#ffffff',
-      padding: '0px 80px',
-      height: '80px'
-    }}>
-      <Row align="middle" justify='space-between'>
-        <Col>
-          <Image style={{ display: 'block' }} src={'/logo.svg'} alt={'Logo'} width={200} height={80} />
-        </Col>
-        <Col span={12}>
-          <MainMenu />
-        </Col>
-      </Row>
-    </Header>
-  )
-}
-
-const MainMenu = () => {
-  let items = [
-    {
-      label: 'Parks',
-      key: 'parks',
-    },
-    {
-      label: 'Pups',
-      key: 'pups',
-    },
-    {
-      label: 'Packs',
-      key: 'packs',
-    },
-  ]
-  const menu = (
-    <Menu
-      selectable
-      items={[
-        {
-          key: '1',
-          label: 'Sign up',
-        },
-        {
-          key: '2',
-          label: 'Log in',
-        }
-      ]}
-    />
-  );
-  return (
-    <>
-      <ul className={styles.mainMenu}>
-        {items.map((item, index) => <li key={index}><span>{item.label}</span></li>)}
-        <Dropdown  overlay={menu} trigger={['click']} placement="bottomLeft">
-          <Typography.Link>
-            <li><span className={styles.avatar}><MenuOutlined style={{ marginRight: 12 }} /><Avatar size={32} icon={<UserOutlined />} /></span></li>
-          </Typography.Link>
-        </Dropdown>
-      </ul>
-    </>
-  )
-}
-
-const CardGallery = ({ items }) => {
-  return (
-    <div className={styles.cardGallery}>
-      <Row gutter={[0, 16]}>
-        {items.map((item, index) => <Card key={index} item={item} />)}
-      </Row>
-    </div>
-  )
-}
-
-const Card = ({ item }) => {
-  let { name, neighborhood, featured_image } = item;
-  return (
-    <Col xs={24} sm={6}>
-      <div className={styles.card}>
-        <div className={styles.image}>
-          <Image src={featured_image || 'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'} className={styles.parkImage} alt={name} width={321} height={321} />
-          <div className={styles.actions}>
-            <div className={styles.circle}><ArrowRightOutlined /></div>
-          </div>
-        </div>
-
-        <h2 className={styles.parkTitle}>{name}</h2>
-        <p>{neighborhood}</p>
-      </div>
-    </Col>
-  )
-}
 
 const ShowMap = () => {
   return (
